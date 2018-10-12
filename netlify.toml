@@ -1,0 +1,11 @@
+[Settings]
+ID = "9fffaf42-0a4f-4757-b602-f9176d3f12fb"
+
+[build]
+publish = "dist"
+command = "npm run build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
