@@ -1,1 +1,1 @@
-export const findByIndex = state => index => state.matrixes[index];
+export const current = state => state.matrixes[state.pointer];

@@ -1,9 +1,12 @@
 import Vue from 'vue';
-import App from './App.vue';
+
+import { Menu, View } from '@/sections';
+
 import { Router } from './views';
 import Store from './store';
-
 import * as serviceWorker from './service-worker';
+
+import './assets/style.scss';
 
 if (process.env.NODE_ENV === 'production') {
   serviceWorker.register();
@@ -11,8 +14,17 @@ if (process.env.NODE_ENV === 'production') {
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router: Router(),
-  store: Store(),
-  render: h => h(App),
-}).$mount('#app');
+const router = Router();
+const store = Store();
+
+const register = (section, el) => new Vue({
+  router,
+  store,
+  el,
+  render: h => h(section),
+});
+
+register(Menu, '#menu');
+register(View, '#view');
+
+store.commit('create');
