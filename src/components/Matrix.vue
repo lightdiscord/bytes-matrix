@@ -1,37 +1,33 @@
 <template>
-  <ul>
-    <li v-for="(line, y) in matrix" :key="y">
-      <input v-for="(item, x) in line" type="checkbox" :key="x"
-        @input="toggle(x, y)">
-    </li>
-  </ul>
+  <div>
+    <ul>
+      <li v-for="(line, y) in matrix" :key="index + '-' + y">
+        <input v-for="(item, x) in line" type="checkbox" :key="index + '-' + x"
+          @input="input(x, y)" :checked="item">
+      </li>
+    </ul>
+
+    <p>Index: {{ index }}</p>
+  </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   props: {
-    size: Number,
-  },
-  data() {
-    return {
-      matrix: [...Array(this.size).fill([...Array(this.size).fill(false)])],
-    };
+    matrix: Array,
+    index: Number,
   },
   methods: {
-    toggle(x, y) {
-      const line = [...this.matrix[y]];
+    ...mapActions(['toggle']),
 
-      line[x] = !line[x];
-
-      this.$set(this.matrix, y, line);
-      this.emit();
+    input(x, y) {
+      this.toggle({
+        index: this.index,
+        coords: { x, y },
+      });
     },
-    emit() {
-      this.$emit('update', this.matrix);
-    },
-  },
-  created() {
-    this.emit();
   },
 };
 </script>
