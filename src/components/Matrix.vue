@@ -68,7 +68,7 @@ export default {
       return parseLines(this.matrix);
     },
     highlight() {
-      return hljs.highlight('arduino', format(this.mode, this.result)).value;
+      return hljs.highlight('arduino', format(this.mode.method, this.result)).value;
     },
   },
   filters: {

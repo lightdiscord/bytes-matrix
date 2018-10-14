@@ -6,7 +6,8 @@
       <a class="navbar-item" v-for="(matrix, i) in matrixes" :key="i"
         :class="{ 'is-active': pointer === i }"
         @click="focus(i)">
-        Matrix #{{ i + 1 }}
+        #{{ i + 1 }}
+        &#160;<a class="delete" @click.stop="destroy(i)"></a>
       </a>
     </div>
   </div>
@@ -20,7 +21,7 @@ export default {
     ...mapState(['matrixes', 'pointer']),
   },
   methods: {
-    ...mapMutations(['create', 'focus']),
+    ...mapMutations(['create', 'focus', 'destroy']),
   },
 };
 </script>

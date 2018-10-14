@@ -16,3 +16,13 @@ export const create = (state) => {
   state.matrixes.push(matrix);
   focus(state, state.matrixes.length - 1);
 };
+
+export const destroy = (state, index) => {
+  focus(state, Math.floor(Math.random() * (state.matrixes.length - 1)));
+
+  state.matrixes.splice(index, 1);
+
+  if (state.matrixes.length === 0) {
+    create(state);
+  }
+};
